@@ -4,6 +4,7 @@ import { useToast } from '@/hooks/use-toast';
 
 export type Expense = {
   id: string;
+  user_id: string;
   amount: number;
   category: string;
   memo?: string;
@@ -38,11 +39,17 @@ export const useExpenses = () => {
     }
   };
 
-  const addExpense = async (expense: Omit<Expense, 'id' | 'created_at' | 'updated_at'>) => {
+  const addExpense = async (expense: Omit<Expense, 'id' | 'created_at' | 'updated_at' | 'user_id'>) => {
     try {
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (!user) {
+        throw new Error('User not authenticated');
+      }
+
       const { data, error } = await supabase
         .from('expenses')
-        .insert([expense])
+        .insert([{ ...expense, user_id: user.id }])
         .select()
         .single();
 
