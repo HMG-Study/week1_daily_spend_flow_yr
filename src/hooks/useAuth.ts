@@ -91,6 +91,25 @@ export const useAuth = () => {
     return { error };
   };
 
+  const signInWithKakao = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'kakao',
+      options: {
+        redirectTo: `${window.location.origin}/`
+      }
+    });
+
+    if (error) {
+      toast({
+        title: "카카오 로그인 실패",
+        description: error.message,
+        variant: "destructive",
+      });
+    }
+
+    return { error };
+  };
+
   const signOut = async () => {
     const { error } = await supabase.auth.signOut();
     
@@ -135,6 +154,7 @@ export const useAuth = () => {
     signUp,
     signIn,
     signInWithGoogle,
+    signInWithKakao,
     signOut,
     resetPassword,
   };

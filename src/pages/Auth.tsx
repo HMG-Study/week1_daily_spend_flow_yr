@@ -9,7 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Separator } from '@/components/ui/separator';
 
 export default function Auth() {
-  const { user, signIn, signUp, resetPassword, signInWithGoogle } = useAuth();
+  const { user, signIn, signUp, resetPassword, signInWithGoogle, signInWithKakao } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -80,6 +80,12 @@ export default function Auth() {
     setLoading(false);
   };
 
+  const handleKakaoLogin = async () => {
+    setLoading(true);
+    await signInWithKakao();
+    setLoading(false);
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <Card className="w-full max-w-md">
@@ -116,6 +122,21 @@ export default function Auth() {
                 />
               </svg>
               {loading ? '로그인 중...' : 'Google로 로그인'}
+            </Button>
+            
+            <Button 
+              onClick={handleKakaoLogin} 
+              variant="outline" 
+              className="w-full" 
+              disabled={loading}
+            >
+              <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24">
+                <path
+                  fill="#000000"
+                  d="M12 3C6.48 3 2 6.48 2 10.8c0 2.7 1.74 5.1 4.38 6.54L5.25 21l3.75-2.25C10.2 18.93 11.1 19 12 19c5.52 0 10-3.48 10-7.8S17.52 3 12 3z"
+                />
+              </svg>
+              {loading ? '로그인 중...' : '카카오로 로그인'}
             </Button>
             
             <div className="relative">
