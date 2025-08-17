@@ -1,8 +1,20 @@
 # Welcome to your Lovable project
 
 ## Project info
-
 **URL**: https://lovable.dev/projects/cd374372-3daf-4b90-841a-fd30be796dc2
+
+- 간단한 가계부 구현
+- supabase DB 연결
+- 로그인 기능
+
+## 화면
+
+<table>
+  <tr>
+    <td><img src="img/display1.png" alt="이미지 1"></td>
+    <td><img src="img/display2.png" alt="이미지 2"></td>
+</table>
+
 
 ## How can I edit this code?
 
